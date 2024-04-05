@@ -23,3 +23,14 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+mimicServerCallback(server, "ping", "ping server);", "ping server");
+mimicServerCallback(server, "pong", "pong server);", "pong server");
+mimicServerCallback(server, "error", "error server);", "error server");
+
+function mimicServerCallback(server, method, response, request) {
+  server.on(method, function(req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write(response);
+    res.end();
+  });
+}
